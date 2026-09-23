@@ -122,7 +122,15 @@ th,td{padding:10px 14px;text-align:left;border-top:1px solid var(--line);white-s
 thead th{border-top:0;font-size:12px;color:var(--muted);font-weight:500}
 td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
 tfoot td{font-weight:600;border-top:2px solid var(--line)}
-.foot{margin-top:28px;font-size:12px;color:var(--muted)}
+.foot{margin-top:28px;font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between}
+.memo{margin-top:10px;display:grid;gap:6px}
+.memo label{font-size:13px;font-weight:600;color:var(--muted);display:flex;justify-content:space-between;align-items:baseline}
+.memo label .saved{font-weight:400;font-size:11.5px;font-family:var(--mono)}
+.memo textarea{width:100%;min-height:88px;resize:vertical;font:inherit;font-size:16px;line-height:1.55;color:var(--ink);background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:10px 12px}
+.memo textarea:focus{outline:none;border:1px solid var(--accent)}
+.memo textarea::placeholder{color:var(--muted);opacity:.7}
+.btn{font:inherit;font-size:12.5px;font-weight:600;color:var(--accent);background:var(--accent-soft);border:0;border-radius:999px;padding:6px 12px;cursor:pointer}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
 @media (max-width:370px){ .chks{grid-template-columns:1fr} ol.tl>li{grid-template-columns:54px 1fr;gap:10px} h1{font-size:38px} }
 @media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
@@ -170,7 +178,7 @@ tfoot td{font-weight:600;border-top:2px solid var(--line)}
     </div>
   </div>
 
-  <p class="foot">체크 표시는 이 기기에만 저장돼요.</p>
+  <div class="foot"><span>체크와 메모는 이 폰에만 저장돼요.</span><button type="button" class="btn" id="copyall">메모 전체 복사</button></div>
 </div>
 
 <script>
@@ -251,7 +259,7 @@ DAYS.forEach((d,i)=>{
     const note=it.note?`<div class="note${it.warn?" warn":""}">${it.note}</div>`:"";
     return `<li class="${it.k}${it.flight?" flight":""}${j===nowIdx?" now":""}">${time}<div class="what"><div class="title"><span class="tag">${TAG[it.k]}</span>${it.title}</div>${note}${sub}</div></li>`;
   }).join("");
-  main.insertAdjacentHTML("beforeend",`<section class="day" id="${id}"><div class="dayhead"><h2>${i+1}일차</h2><span class="date">${d.label}</span><span class="theme">${d.theme}</span></div><ol class="tl">${lis}</ol></section>`);
+  main.insertAdjacentHTML("beforeend",`<section class="day" id="${id}"><div class="dayhead"><h2>${i+1}일차</h2><span class="date">${d.label}</span><span class="theme">${d.theme}</span></div><ol class="tl">${lis}</ol><div class="memo"><label for="memo-${i+1}">오늘의 한 줄 일기 <span class="saved" id="saved-${i+1}"></span></label><textarea id="memo-${i+1}" data-i="${i}" placeholder="좋았던 것, 맛있었던 것, 다음엔 이렇게…"></textarea></div></section>`);
 });
 
 // 스크롤 위치에 따라 날짜 탭 강조
@@ -287,6 +295,23 @@ checks(document.getElementById("preplist"),PREP,"prep",st=>{
 });
 if(today<"2026-10-03")prepEl.open=true;
 checks(document.getElementById("food"),FOOD,"food");
+
+// 일차별 메모 (이 기기에 자동 저장)
+const memos=load("memo");
+document.querySelectorAll(".memo textarea").forEach(ta=>{
+  const i=ta.dataset.i, out=document.getElementById("saved-"+(+i+1));
+  ta.value=memos[i]||"";
+  let tm;
+  ta.addEventListener("input",()=>{
+    memos[i]=ta.value; save("memo",memos);
+    out.textContent="저장됨"; clearTimeout(tm); tm=setTimeout(()=>out.textContent="",1500);
+  });
+});
+document.getElementById("copyall").addEventListener("click",e=>{
+  const text=DAYS.map((d,i)=>`[${i+1}일차 ${d.label}]\n${(memos[i]||"").trim()||"-"}`).join("\n\n");
+  const b=e.currentTarget, done=m=>{b.textContent=m;setTimeout(()=>b.textContent="메모 전체 복사",1800);};
+  navigator.clipboard.writeText(text).then(()=>done("복사됐어요"),()=>done("복사 실패"));
+});
 </script>
 </body>
 </html>
