@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3F5FA">
+<title>후쿠시마 아니고 후쿠오카</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F3F5FA; --surface:#FFFFFF; --ink:#1A1F36; --muted:#5E6583; --line:#DFE3EE;
+  --accent:#2E3F9E; --accent-soft:#E6E9F8;
+  --meal:#B4530A; --meal-soft:#FBEBDC;
+  --sight:#0F766E; --sight-soft:#DCF1EE;
+  --move:#2E3F9E; --move-soft:#E6E9F8;
+  --rest:#6B7190; --rest-soft:#ECEEF4;
+  --now:#D6336C;
+  --display:"Do Hyeon","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1120; --surface:#171B2D; --ink:#E7EAF5; --muted:#9BA1BE; --line:#2A3048;
+    --accent:#93A1F2; --accent-soft:#232A4D;
+    --meal:#F2A766; --meal-soft:#3A2717;
+    --sight:#5FCABB; --sight-soft:#15332F;
+    --move:#93A1F2; --move-soft:#232A4D;
+    --rest:#A3A8C3; --rest-soft:#232739;
+    --now:#FF7AA5;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1120; --surface:#171B2D; --ink:#E7EAF5; --muted:#9BA1BE; --line:#2A3048;
+  --accent:#93A1F2; --accent-soft:#232A4D;
+  --meal:#F2A766; --meal-soft:#3A2717;
+  --sight:#5FCABB; --sight-soft:#15332F;
+  --move:#93A1F2; --move-soft:#232A4D;
+  --rest:#A3A8C3; --rest-soft:#232739;
+  --now:#FF7AA5;
+}
+*{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:560px;margin:0 auto;padding-inline:16px;padding-block:28px 56px}
+
+header.top{display:grid;gap:6px;padding-bottom:18px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--muted)}
+h1{font-family:var(--display);font-weight:400;font-size:44px;line-height:1.05;margin:0;letter-spacing:-.01em;text-wrap:balance}
+h1 s{color:var(--muted);text-decoration-thickness:3px;font-size:.62em;display:block;margin-bottom:2px}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin-top:10px;font-size:13.5px}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0}
+.code{font-family:var(--mono);font-weight:600;font-size:.92em;letter-spacing:.02em}
+
+nav.days{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);margin-inline:-16px;padding:10px 16px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+nav.days a{display:grid;justify-items:center;gap:0;padding:6px 2px;border-radius:10px;text-decoration:none;color:var(--muted);background:var(--surface);border:1px solid var(--line)}
+nav.days a b{font-family:var(--display);font-weight:400;font-size:17px;line-height:1.2;color:var(--ink)}
+nav.days a span{font-size:11.5px;font-family:var(--mono)}
+nav.days a.on{background:var(--accent);border-color:var(--accent)}
+nav.days a.on b,nav.days a.on span{color:var(--bg)}
+nav.days a:focus-visible,summary:focus-visible,label.chk:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+
+section.day{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 76px);padding-top:26px}
+.dayhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.dayhead h2{font-family:var(--display);font-weight:400;font-size:26px;margin:0;line-height:1.2}
+.dayhead .date{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.dayhead .theme{font-size:13px;color:var(--muted);flex-basis:100%}
+
+ol.tl{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+ol.tl>li{display:grid;grid-template-columns:62px 1fr;gap:12px;padding:12px 14px;border-top:1px solid var(--line);position:relative}
+ol.tl>li:first-child{border-top:0}
+.time{font-family:var(--mono);font-size:12.5px;font-weight:600;line-height:1.35;color:var(--ink);font-variant-numeric:tabular-nums;padding-top:2px}
+.time small{display:block;font-weight:500;color:var(--muted)}
+.time.none{color:var(--muted);font-weight:500}
+.what{display:grid;gap:4px;min-width:0}
+.title{font-weight:600;font-size:15.5px;line-height:1.4;overflow-wrap:anywhere}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:1px 7px;border-radius:999px;margin-right:6px;vertical-align:2px;letter-spacing:.02em}
+.meal .tag{color:var(--meal);background:var(--meal-soft)}
+.sight .tag{color:var(--sight);background:var(--sight-soft)}
+.move .tag{color:var(--move);background:var(--move-soft)}
+.rest .tag{color:var(--rest);background:var(--rest-soft)}
+.rest .title{font-weight:500;color:var(--muted)}
+.note{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.note.warn{color:var(--meal)}
+ul.sub{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:6px}
+ul.sub li{font-size:13.5px;padding-left:12px;border-left:2px solid var(--line)}
+ul.sub li .note{display:block}
+.flight .title{font-family:var(--display);font-weight:400;font-size:19px;letter-spacing:.01em}
+li.now{background:color-mix(in srgb,var(--now) 8%,var(--surface))}
+li.now::before{content:"지금";position:absolute;right:12px;top:12px;font-size:11px;font-weight:600;color:var(--surface);background:var(--now);border-radius:999px;padding:1px 8px}
+li.now .what{padding-right:40px}
+
+.panel{margin-top:30px}
+.panel h2{font-family:var(--display);font-weight:400;font-size:22px;margin:0 0 10px}
+details.prep{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:0 14px;margin-top:6px}
+details.prep summary{cursor:pointer;padding:12px 0;font-weight:600;display:flex;justify-content:space-between;align-items:center;list-style:none}
+details.prep summary::-webkit-details-marker{display:none}
+details.prep summary .cnt{font-family:var(--mono);font-size:12.5px;color:var(--muted);font-weight:500}
+.chks{display:grid;grid-template-columns:1fr 1fr;gap:2px 10px;padding-bottom:12px}
+label.chk{display:flex;gap:8px;align-items:flex-start;padding:6px 0;font-size:14px;cursor:pointer;border-radius:6px}
+label.chk input{margin:3px 0 0;width:17px;height:17px;accent-color:var(--accent);flex:none}
+label.chk input:checked+span{color:var(--muted);text-decoration:line-through}
+.food{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.food .chk{flex-direction:column;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 4px;font-weight:600}
+.food .chk input{margin:0}
+.food .chk span{text-align:center;line-height:1.3}
+.food .chk small{font-size:11px;font-weight:400;color:var(--muted);text-align:center;line-height:1.3}
+.food .chk input:checked~small{opacity:.6}
+
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:10px 14px;text-align:left;border-top:1px solid var(--line);white-space:nowrap}
+thead th{border-top:0;font-size:12px;color:var(--muted);font-weight:500}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+tfoot td{font-weight:600;border-top:2px solid var(--line)}
+.foot{margin-top:28px;font-size:12px;color:var(--muted)}
+
+@media (max-width:370px){ .chks{grid-template-columns:1fr} ol.tl>li{grid-template-columns:54px 1fr;gap:10px} h1{font-size:38px} }
+@media (prefers-reduced-motion:no-preference){ html{scroll-behavior:smooth} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">2026 · 10.3 토 — 10.6 화 · 3박 4일</div>
+    <h1><s>후쿠시마</s>후쿠오카</h1>
+    <dl class="facts">
+      <dt>가는 편</dt><dd><span class="code">7C1471</span> 인천 11:10 → 후쿠오카 12:40</dd>
+      <dt>오는 편</dt><dd><span class="code">7C1408</span> 후쿠오카 19:50 → 인천 21:20</dd>
+      <dt>숙소</dt><dd>로얄 파크 호텔 후쿠오카</dd>
+    </dl>
+  </header>
+
+  <nav class="days" id="daynav" aria-label="날짜 이동"></nav>
+
+  <details class="prep panel" id="prep">
+    <summary>출발 전 준비 <span class="cnt" id="prepcnt"></span></summary>
+    <div class="chks" id="preplist"></div>
+  </details>
+
+  <main id="days"></main>
+
+  <div class="panel">
+    <h2>먹킷리스트</h2>
+    <div class="food" id="food"></div>
+  </div>
+
+  <div class="panel">
+    <h2>이미 낸 돈</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>항목</th><th class="n">엔화</th><th class="n">원화</th></tr></thead>
+        <tbody>
+          <tr><td>호텔</td><td class="n">¥67,488</td><td class="n">₩612,940</td></tr>
+          <tr><td>유후인 기차</td><td class="n">¥10,200</td><td class="n">₩88,996</td></tr>
+          <tr><td>유후인 버스</td><td class="n">¥6,500</td><td class="n">₩56,674</td></tr>
+        </tbody>
+        <tfoot><tr><td>합계</td><td class="n">¥84,188</td><td class="n">₩758,610</td></tr></tfoot>
+      </table>
+    </div>
+  </div>
+
+  <p class="foot">체크 표시는 이 기기에만 저장돼요.</p>
+</div>
+
+<script>
+const DAYS=[
+ {date:"2026-10-03",label:"10/3 토",theme:"도착 · 하카타 & 나카스",items:[
+  {t:"08:10",k:"move",title:"인천공항 집결",note:"<span class='code'>7C1471</span> · T1 L카운터"},
+  {t:"11:10",e:"12:40",k:"move",flight:1,title:"인천 → 후쿠오카"},
+  {t:"12:40",e:"13:30",k:"move",title:"입국 심사",sub:[
+    ["현금 인출","국제선 세븐뱅크 / 국내선 AEON"],
+    ["교통카드 충전","버스info에서 니모카 (현금 2,000엔)"],
+    ["지하철","국내선 연결버스 탑승 (A2)"]]},
+  {t:"13:30",e:"14:00",k:"rest",title:"로얄 파크 호텔 후쿠오카"},
+  {t:"14:00",e:"15:00",k:"meal",title:"로바타센교 소반 로안 or 요시즈카우나기야",note:"장어덮밥"},
+  {t:"15:00",e:"17:00",k:"sight",title:"구시다 신사"},
+  {t:"17:00",e:"19:00",k:"sight",title:"캐널시티 → 나카스 강변",note:"커비 카페 · 커비 굿즈샵"},
+  {t:"19:00",e:"20:00",k:"meal",title:"카이센동"},
+  {k:"sight",title:"세븐일레븐 or 로손"},
+  {t:"23:00",k:"rest",title:"휴식"}]},
+ {date:"2026-10-04",label:"10/4 일",theme:"유후인 당일치기",items:[
+  {t:"06:50",e:"07:20",k:"rest",title:"기상 및 준비"},
+  {t:"07:20",e:"07:40",k:"move",title:"하카타역 이동"},
+  {t:"07:43",e:"10:02",k:"move",flight:1,title:"하카타 → 유후인",note:"유후 특급 1호차 1A, 1B"},
+  {t:"10:20",e:"12:00",k:"sight",title:"무소엔",note:"1,000엔 · 수건 지참 (없으면 300엔)"},
+  {t:"12:30",e:"13:30",k:"meal",title:"유노츠보 거리",note:"고로케, 당고"},
+  {t:"13:30",e:"14:00",k:"sight",title:"카이유칸 기모노 대여",note:"5,000엔 이상"},
+  {t:"14:00",e:"16:40",k:"sight",title:"긴린코 호수 · 유노츠보 거리"},
+  {t:"17:00",e:"19:07",k:"move",flight:1,title:"유후인 → 하카타"},
+  {t:"19:10",e:"20:00",k:"meal",title:"라쿠텐치 or 마에다야",note:"모츠나베"},
+  {t:"20:00",e:"21:00",k:"sight",title:"로피아 마트",note:"현금만 받음",warn:1},
+  {t:"21:00",k:"sight",title:"메이즈 공원"},
+  {t:"23:00",k:"rest",title:"휴식"}]},
+ {date:"2026-10-05",label:"10/5 월",theme:"쇼핑 & 모모치 해변 일몰",items:[
+  {t:"07:00",e:"08:30",k:"rest",title:"기상 및 준비"},
+  {t:"09:30",e:"11:30",k:"sight",title:"(장소 미정)",note:"상설전 200엔"},
+  {t:"11:30",e:"12:30",k:"meal",title:"카이센동"},
+  {t:"12:30",e:"15:00",k:"sight",title:"쇼핑: 단톤, 셀린느, 다이소 등",note:"칼디"},
+  {t:"15:00",e:"15:30",k:"move",title:"모모치로 이동"},
+  {t:"15:30",e:"17:00",k:"sight",title:"모모치 해변",note:"일몰이 예쁘다고 함"},
+  {t:"18:30",e:"19:30",k:"meal",title:"덴뿌라"},
+  {t:"23:00",k:"rest",title:"휴식"}]},
+ {date:"2026-10-06",label:"10/6 화",theme:"오호리 공원 · 귀국",items:[
+  {t:"07:00",e:"08:30",k:"rest",title:"기상 및 준비"},
+  {t:"08:30",e:"10:30",k:"sight",title:"오호리 공원 산책 + 후쿠오카 미술관"},
+  {t:"11:00",e:"12:00",k:"meal",title:"이나바쵸 잇케이",note:"도미 오차즈케"},
+  {t:"12:00",e:"14:00",k:"sight",title:"카페, 쇼핑 (앤쏘온)"},
+  {t:"16:00",e:"16:50",k:"meal",title:"하카타 멘가도",note:"라멘"},
+  {t:"16:50",e:"17:10",k:"move",title:"숙소로 이동"},
+  {t:"17:10",e:"17:50",k:"move",title:"짐 찾고 택시로 공항"},
+  {t:"17:50",e:"19:50",k:"move",title:"출국 심사"},
+  {t:"19:50",e:"21:20",k:"move",flight:1,title:"후쿠오카 → 인천",note:"<span class='code'>7C1408</span>"},
+  {t:"21:20",e:"22:00",k:"move",title:"입국 수속"},
+  {t:"22:00",k:"rest",title:"귀가"}]}
+];
+const TAG={meal:"식사",sight:"일정",move:"이동",rest:"휴식"};
+const PREP=["이심","여행자보험","트래블카드 (로그 or 월렛)","스마트패스","비짓재팬","24시간 전 온라인 체크인","동전지갑","면세품 주문"];
+const FOOD=["카이센동","장어덮밥","고로케","당고","모츠나베","덴뿌라","도미 오차즈케","라멘","스시"];
+
+function load(k){try{return JSON.parse(localStorage.getItem(k))||{}}catch(e){return{}}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+
+// 일본·한국 시간 동일 (UTC+9)
+const nowJ=new Date(Date.now()+9*3600e3);
+const today=nowJ.toISOString().slice(0,10);
+const nowMin=nowJ.getUTCHours()*60+nowJ.getUTCMinutes();
+const toMin=s=>{const[h,m]=s.split(":").map(Number);return h*60+m};
+
+const nav=document.getElementById("daynav"), main=document.getElementById("days");
+DAYS.forEach((d,i)=>{
+  const id="day"+(i+1);
+  const [md,dow]=d.label.split(" ");
+  nav.insertAdjacentHTML("beforeend",`<a href="#${id}" data-i="${i}"><b>${i+1}일차</b><span>${md} ${dow}</span></a>`);
+  // 현재 진행 중인 항목 찾기
+  let nowIdx=-1;
+  if(d.date===today){d.items.forEach((it,j)=>{if(it.t&&toMin(it.t)<=nowMin)nowIdx=j;});}
+  const lis=d.items.map((it,j)=>{
+    const time=it.t?`<div class="time">${it.t}${it.e?`<small>~${it.e}</small>`:"<small>~</small>"}</div>`:`<div class="time none">틈틈이</div>`;
+    const sub=it.sub?`<ul class="sub">${it.sub.map(s=>`<li>${s[0]}<span class="note">${s[1]}</span></li>`).join("")}</ul>`:"";
+    const note=it.note?`<div class="note${it.warn?" warn":""}">${it.note}</div>`:"";
+    return `<li class="${it.k}${it.flight?" flight":""}${j===nowIdx?" now":""}">${time}<div class="what"><div class="title"><span class="tag">${TAG[it.k]}</span>${it.title}</div>${note}${sub}</div></li>`;
+  }).join("");
+  main.insertAdjacentHTML("beforeend",`<section class="day" id="${id}"><div class="dayhead"><h2>${i+1}일차</h2><span class="date">${d.label}</span><span class="theme">${d.theme}</span></div><ol class="tl">${lis}</ol></section>`);
+});
+
+// 스크롤 위치에 따라 날짜 탭 강조
+const links=[...nav.querySelectorAll("a")];
+function setOn(i){links.forEach((a,j)=>a.classList.toggle("on",j===i));}
+const secs=[...document.querySelectorAll("section.day")];
+function onScroll(){
+  let cur=0;const y=nav.getBoundingClientRect().bottom+20;
+  secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<=y)cur=i;});
+  setOn(cur);
+}
+addEventListener("scroll",onScroll,{passive:true});
+const ti=DAYS.findIndex(d=>d.date===today);
+setOn(ti>=0?ti:0);
+
+// 체크리스트
+function checks(el,list,key,cb){
+  const st=load(key);
+  list.forEach((entry,i)=>{
+    const [name,hint]=Array.isArray(entry)?entry:[entry];
+    const id=key+"-"+i;
+    el.insertAdjacentHTML("beforeend",`<label class="chk" for="${id}" data-name="${name}"><input type="checkbox" id="${id}" ${st[name]?"checked":""}><span>${name}</span>${hint?`<small>${hint}</small>`:""}</label>`);
+  });
+  el.addEventListener("change",e=>{
+    st[e.target.closest("label").dataset.name]=e.target.checked;save(key,st);cb&&cb(st);
+  });
+  cb&&cb(st);
+}
+const prepEl=document.getElementById("prep");
+checks(document.getElementById("preplist"),PREP,"prep",st=>{
+  const n=PREP.filter(p=>st[p]).length;
+  document.getElementById("prepcnt").textContent=`${n} / ${PREP.length}`;
+});
+if(today<"2026-10-03")prepEl.open=true;
+checks(document.getElementById("food"),FOOD,"food");
+</script>
+</body>
+</html>
