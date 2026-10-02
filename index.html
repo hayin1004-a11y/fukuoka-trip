@@ -270,6 +270,8 @@ ul.tips{margin:0;padding:0 14px 12px 32px;display:grid;gap:6px;font-size:13.5px}
 #show .s2{font-size:clamp(28px,8vw,44px);font-weight:600;line-height:1.3;overflow-wrap:anywhere}
 #show .s3{font-size:clamp(17px,4.6vw,22px);line-height:1.5;overflow-wrap:anywhere}
 #show .s4{font-size:13px;color:var(--muted)}
+#show .ko{font-size:14px;line-height:1.6;color:var(--muted);opacity:.85;white-space:pre-line;border-top:1px solid var(--line);padding-top:12px;overflow-wrap:anywhere}
+#show .s3{white-space:pre-line}
 
 /* 하단 탭바 */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
@@ -513,7 +515,7 @@ ul.tips{margin:0;padding:0 14px 12px 32px;display:grid;gap:6px;font-size:13.5px}
   </form>
 </dialog>
 
-<div id="show" hidden role="dialog" aria-modal="true" aria-label="보여주기 카드"><div class="in"><div class="s1" id="sh1"></div><div class="s2" id="sh2"></div><div class="s3" id="sh3"></div><div class="s4">화면을 누르면 닫혀요</div></div></div>
+<div id="show" hidden role="dialog" aria-modal="true" aria-label="보여주기 카드"><div class="in"><div class="s1" id="sh1"></div><div class="s2" id="sh2"></div><div class="s3" id="sh3"></div><div class="ko" id="sh-ko"></div><div class="s4">화면을 누르면 닫혀요</div></div></div>
 <div class="toast" id="toast" hidden><span id="toast-t"></span><button type="button" id="toast-b">되돌리기</button></div>
 
 <script>
@@ -759,7 +761,7 @@ document.getElementById("tab-plan").addEventListener("click",e=>{
     b.dataset.armed=1;b.textContent="한 번 더 누르면 되돌려요";setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent="이 날 원래 일정으로 되돌리기";}},3000);return;
   }
   if(b.dataset.add!=null){openEditor(null,+b.dataset.add);return;}
-  if(b.dataset.showitem){const it=PLAN[curDay].items.find(i=>i.id===b.dataset.showitem);if(it){const [l1,...r]=it.ja.split("\n");showCard("ここに行きたいです",l1,r.join("\n"));}return;}
+  if(b.dataset.showitem){const it=PLAN[curDay].items.find(i=>i.id===b.dataset.showitem);if(it){const [l1,...r]=it.ja.split("\n");const ask=/お願いします$/.test(l1);const ko=ask?(/国際線/.test(l1)?"후쿠오카 공항 국제선 터미널까지 가 주세요":"여기까지 가 주세요\n"+it.title):"여기에 가고 싶어요\n"+it.title;showCard(ask?"":"ここに行きたいです",l1,r.join("\n"),ko);}return;}
   if(b.dataset.jump){curDay=+b.dataset.jumpday;renderPlan();const el=document.querySelector(`[data-id="${b.dataset.jump}"]`);(el&&el.previousElementSibling||el)?.scrollIntoView({block:"center"});return;}
   const li=b.closest("li.it");if(!li)return;
   const items=PLAN[curDay].items,j=findItem(li.dataset.id),it=items[j];
@@ -809,13 +811,13 @@ $("edform").addEventListener("submit",e=>{
 });
 
 /* ───────── 보여주기 카드 ───────── */
-function showCard(a,b,c){$("sh1").textContent=a;$("sh2").textContent=b;$("sh3").textContent=c||"";$("show").hidden=false;}
+function showCard(a,b,c,ko){$("sh1").textContent=a;$("sh1").hidden=!a;$("sh2").textContent=b;$("sh3").textContent=c||"";$("sh3").hidden=!c;$("sh-ko").textContent=ko||"";$("sh-ko").hidden=!ko;$("show").hidden=false;}
 $("show").addEventListener("click",()=>$("show").hidden=true);
 addEventListener("keydown",e=>{if(e.key==="Escape")$("show").hidden=true;});
 document.addEventListener("click",e=>{
   const b=e.target.closest("[data-show]");if(!b)return;
-  if(b.dataset.show==="hotel")showCard("このホテルまでお願いします","ザ ロイヤルパークホテル 福岡","福岡市博多区博多駅前2-14-15\n(博多駅 博多口 徒歩5分)");
-  else{const p=PHRASES[+b.dataset.show];showCard(p[0],p[1],p[2]);}
+  if(b.dataset.show==="hotel")showCard("このホテルまでお願いします","ザ ロイヤルパークホテル 福岡","福岡市博多区博多駅前2-14-15\n(博多駅 博多口 徒歩5分)","이 호텔까지 가 주세요\n더 로열 파크 호텔 후쿠오카 · 하카타역 하카타구치 도보 5분");
+  else{const p=PHRASES[+b.dataset.show];showCard("",p[1],"",p[0]+"\n읽는 법: "+p[2]);}
 });
 
 /* ───────── 토스트 ───────── */
