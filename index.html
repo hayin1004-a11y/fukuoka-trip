@@ -424,8 +424,8 @@ ul.tips{margin:0;padding:0 14px 12px 32px;display:grid;gap:6px;font-size:13.5px}
           <dt>공항에서</dt><dd>택시 약 15분</dd>
         </dl>
         <div class="place">
-          <a class="chip" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E3%82%B6%20%E3%83%AD%E3%82%A4%E3%83%A4%E3%83%AB%E3%83%91%E3%83%BC%E3%82%AF%E3%83%9B%E3%83%86%E3%83%AB%20%E7%A6%8F%E5%B2%A1">지도</a>
-          <a class="chip" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E3%82%B6%20%E3%83%AD%E3%82%A4%E3%83%A4%E3%83%AB%E3%83%91%E3%83%BC%E3%82%AF%E3%83%9B%E3%83%86%E3%83%AB%20%E7%A6%8F%E5%B2%A1&travelmode=walking">여기서 숙소까지 길찾기</a>
+          <a class="chip" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%89%8D2%E4%B8%81%E7%9B%AE14-15%20%E3%82%B6%20%E3%83%AD%E3%82%A4%E3%83%A4%E3%83%AB%E3%83%91%E3%83%BC%E3%82%AF%E3%83%9B%E3%83%86%E3%83%AB%20%E7%A6%8F%E5%B2%A1">지도</a>
+          <a class="chip" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E7%A6%8F%E5%B2%A1%E5%B8%82%E5%8D%9A%E5%A4%9A%E5%8C%BA%E5%8D%9A%E5%A4%9A%E9%A7%85%E5%89%8D2%E4%B8%81%E7%9B%AE14-15%20%E3%82%B6%20%E3%83%AD%E3%82%A4%E3%83%A4%E3%83%AB%E3%83%91%E3%83%BC%E3%82%AF%E3%83%9B%E3%83%86%E3%83%AB%20%E7%A6%8F%E5%B2%A1&travelmode=walking">여기서 숙소까지 길찾기</a>
           <button type="button" class="chip ghost" data-show="hotel">택시 기사님께 보여주기</button>
         </div>
       </div>
@@ -542,6 +542,7 @@ ul.tips{margin:0;padding:0 14px 12px 32px;display:grid;gap:6px;font-size:13.5px}
 
 <script>
 /* ───────── 기본 일정 (엑셀 수정본 기준) ───────── */
+const HOTEL_Q="福岡県福岡市博多区博多駅前2丁目14-15 ザ ロイヤルパークホテル 福岡";
 const UME={n:"勝喜梅 쇼키바이 (우메보시 전문점)",d:"신사 옆 가와바타 상점가 · 10:00~19:00 · 화요일 휴무",q:"勝喜梅 上川端"};
 const SAKE={t:"12:00",e:"12:30",k:"shop",title:"스미요시 슈한 (사케 · 우브스나 찾기)",note:"하카타역 데이토스 1층 · 21:00까지\n우브스나(産土)는 인기라 품절이거나 1인 1병 제한일 수 있어요\n가게 안 각우치(서서 마시는 코너)에서 작은 잔 시음 세트 가능 (주문 20:00까지)\n한국 입국 면세: 술은 1인 합계 2L · $400 이하 (2025년 3월부터 병 수 제한 없음)",area:"hakata",q:"住吉酒販 博多駅店",ja:"九州の酒と食 住吉酒販 博多駅店\n博多駅 博多デイトス 1F\n「産土（うぶすな）」はありますか？",jk:"규슈 술 가게 스미요시 슈한 하카타역점 (데이토스 1층)\n'우브스나(産土)' 있나요?",
   sub:[{n:"2일차 밤에 미리 확인해도 좋아요",d:"유후인에서 돌아와 하카타역 주변에 있는 19~21시에 재고 확인"},{n:"다른 판매처: 博多阪急 지하 1층 술 매장",d:"한큐 백화점 (3일차 10시 일정)",q:"博多阪急"}],
@@ -555,7 +556,7 @@ const DEFAULT_DAYS=[
     {n:"현금 인출",d:"국제선 세븐뱅크 ATM / 국내선 AEON"},
     {n:"교통카드 충전",d:"니시테츠 버스 창구, 로손"},
     {n:"지하철 타러 가기",d:"국내선 연결버스 탑승 (A2)"}]},
-  {t:"13:30",e:"14:00",k:"rest",title:"로얄 파크 호텔 후쿠오카 (짐 맡기기)",note:"체크인 전이면 프런트에 짐만 맡기기",area:"hakata",q:"ザ ロイヤルパークホテル 福岡",ja:"ザ ロイヤルパークホテル 福岡\n福岡市博多区博多駅前2-14-15",
+  {t:"13:30",e:"14:00",k:"rest",title:"로얄 파크 호텔 후쿠오카 (짐 맡기기)",note:"체크인 전이면 프런트에 짐만 맡기기",area:"hakata",q:HOTEL_Q,ja:"ザ ロイヤルパークホテル 福岡\n福岡市博多区博多駅前2-14-15",
    go:{m:"subway",min:"약 30분",how:"국제선 1층에서 국내선행 무료 연결버스 탑승 (A2, 약 15분)\n국내선 터미널 하차 → '地下鉄' 표지 따라 후쿠오카쿠코(福岡空港)역\n공항선(주황) 2정거장, 5분 → 하카타(博多) 하차\n'博多口(하카타구치)' 표지 따라 지상으로 → 도보 5분"}},
   {t:"14:00",e:"15:00",k:"meal",title:"점심: 로바타센교 소반 로안 or 요시즈카 우나기야 (장어덮밥)",note:"로안은 점심 주문 14:00 마감이라 빠듯해요. 14시가 넘으면 우나기야로!",warn:1,area:"nakasu",q:"博多名代 吉塚うなぎ屋",ja:"博多名代 吉塚うなぎ屋\n福岡市博多区中洲2-8-27",
    sub:[{n:"요시즈카 우나기야",d:"中洲2-8-27 · 10:30~21:00 (수요일 휴무)",q:"博多名代 吉塚うなぎ屋"},{n:"로안 (炉庵 ROAN)",d:"하카타역 치쿠시구치 도보 3분 · 점심 11:30~14:30",q:"博多炉ばた 鮮魚と蕎麦 炉庵 ROAN 博多本店"}],
@@ -604,7 +605,7 @@ const DEFAULT_DAYS=[
    go:KALDI_GO},
   {t:"14:00",e:"16:00",k:"meal",title:"카페",note:"가게 미정",area:"hakata",q:"カフェ 博多駅"},
   {t:"16:00",e:"16:50",k:"meal",title:"저녁: 신신 or 잇푸도 or 일성 (라멘)",area:"hakata",q:"ラーメン 博多駅",sub:[{n:"신신",d:"",q:"ShinShin 博多デイトス"},{n:"잇푸도",d:"",q:"一風堂 博多駅"},{n:"일성 (博多一双?)",d:"博多駅東3-1-6 · 11:00~24:00",q:"博多一双 博多駅東本店"}]},
-  {t:"16:50",e:"17:10",k:"move",title:"숙소로 이동",area:"hakata",q:"ザ ロイヤルパークホテル 福岡",go:{m:"walk",min:"약 5~10분"}},
+  {t:"16:50",e:"17:10",k:"move",title:"숙소로 이동",area:"hakata",q:HOTEL_Q,go:{m:"walk",min:"약 5~10분"}},
   {t:"17:10",e:"17:50",k:"move",title:"짐 찾고 택시로 공항",note:"'국제선 터미널'이라고 꼭 말하기 (아래 보여주기)",warn:1,area:"airport",q:"福岡空港 国際線ターミナル",ja:"福岡空港 国際線ターミナルまでお願いします",go:{m:"taxi",min:"약 15~20분",how:"호텔 앞 택시\n'福岡空港 国際線ターミナル' 카드 보여주기"}},
   {t:"17:50",e:"19:50",k:"move",title:"출국 심사",area:"airport"},
   {t:"19:50",e:"21:20",k:"move",flight:1,title:"후쿠오카 → 인천",note:"제주항공 7C1408",area:"",go:{m:"plane",min:"1시간 30분"}},
@@ -699,6 +700,11 @@ if(load("planPatch",0)<4){
     if(it.go&&it.go.how)it.go.how=it.go.how.replace("텐진역 → 공항선(주황) 후쿠오카쿠코 방면 2정거장","텐진역 → 공항선(주황) 후쿠오카쿠코 방면 3정거장").replace("메이노하마(姪浜) 방면\n2정거장, 5분 → 텐진(天神)","메이노하마(姪浜) 방면\n3정거장, 5분 → 텐진(天神)").replace("후쿠오카쿠코 방면\n2정거장 → 하카타 하차","후쿠오카쿠코 방면\n3정거장, 5분 → 하카타 하차").replace("버스 내린 건물(하카타 버스터미널) 엘리베이터로 다이소 층","버스 내린 건물(하카타 버스터미널) 엘리베이터로 5층");
   }));
   save("planPatch",4);savePlan();
+}
+if(load("planPatch",0)<5){
+  // 호텔 지도 검색어를 주소로 (이름만 넣으면 나카스의 다른 로열파크 호텔이 잡힘)
+  PLAN.forEach(d=>d.items.forEach(it=>{if(it.q==="ザ ロイヤルパークホテル 福岡")it.q=HOTEL_Q;}));
+  save("planPatch",5);savePlan();
 }
 
 /* ───────── 시간 (일본 = 한국 시간) ───────── */
