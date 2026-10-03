@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#F3F5FA">
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="후쿠오카">
 <title>후쿠시마 아니고 후쿠오카</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -488,7 +492,7 @@ ul.tips{margin:0;padding:0 14px 12px 32px;display:grid;gap:6px;font-size:13.5px}
         <span class="muted" id="bk-msg" style="font-size:12.5px"></span>
       </div>
     </div>
-    <p class="foot">일정 시간은 일본 시간 기준이에요 (한국과 같음).</p>
+    <p class="foot">일정 시간은 일본 시간 기준이에요 (한국과 같음). 한 번 열어 두면 인터넷이 없어도 페이지가 열려요. 구글맵 길찾기와 지도는 인터넷이 필요해요.</p>
   </section>
 </div>
 
@@ -1041,6 +1045,10 @@ $("memo-copy").addEventListener("click",e=>{
 /* ───────── 시작 ───────── */
 renderPlan();
 goTab(location.hash.slice(1));
+// 인터넷 없이도 열리게 (github.io 같은 https 주소에서만)
+if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostname==="localhost")){
+  addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+}
 setInterval(()=>{if(!document.hidden&&!editing&&!$("tab-plan").hidden){renderNow();}},60000);
 </script>
 </body>
