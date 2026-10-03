@@ -971,7 +971,9 @@ $("buylist").addEventListener("click",e=>{const b=e.target.closest("[data-addsho
   if(shop.some(x=>x.t===t)){toast("이미 쇼핑 리스트에 있어요");return;}shop.push({t,done:false});save("shop",shop);drawShop();toast("쇼핑 리스트에 담았어요");});
 
 /* ───────── 가계부 ───────── */
-let rate=+load("rate",910);
+let rate=+load("rate",860);
+// 2026-10-03 기준 환율(100엔=860원)로 한 번 맞추기. 이후 직접 바꾼 값은 유지
+if(load("rateUpd",0)<1){rate=860;save("rate",rate);save("rateUpd",1);}
 let exps=load("exp",[]);if(!Array.isArray(exps))exps=[];
 $("cv-rate").value=rate;
 $("ex-day").innerHTML=PLAN.map((d,i)=>`<option value="${i}">${i+1}일차 ${d.label}</option>`).join("");
